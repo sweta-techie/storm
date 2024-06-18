@@ -13,3 +13,4 @@ Wikipedia-API==0.6.0
 rouge-score
 toml
 tqdm==4.66.0
+security==1.2.1
