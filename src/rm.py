@@ -3,9 +3,9 @@ import os
 from typing import Callable, Union, List
 
 import dspy
-import requests
 
 from utils import WebPageHelper
+from security import safe_requests
 
 
 class YouRM(dspy.Retrieve):
@@ -51,7 +51,7 @@ class YouRM(dspy.Retrieve):
         for query in queries:
             try:
                 headers = {"X-API-Key": self.ydc_api_key}
-                results = requests.get(
+                results = safe_requests.get(
                     f"https://api.ydc-index.io/search?query={query}",
                     headers=headers,
                 ).json()
@@ -137,7 +137,7 @@ class BingSearch(dspy.Retrieve):
 
         for query in queries:
             try:
-                results = requests.get(
+                results = safe_requests.get(
                     self.endpoint,
                     headers=headers,
                     params={**self.params, 'q': query}
