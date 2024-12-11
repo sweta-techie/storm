@@ -13,3 +13,4 @@ Wikipedia-API==0.6.0
 rouge-score
 toml
 tqdm==4.66.0
+fickling>=0.1.3,~=0.1.0
