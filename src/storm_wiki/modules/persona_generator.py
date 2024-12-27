@@ -3,14 +3,14 @@ import re
 from typing import Union, List
 
 import dspy
-import requests
 from bs4 import BeautifulSoup
+from security import safe_requests
 
 
 def get_wiki_page_title_and_toc(url):
     """Get the main title and table of contents from an url of a Wikipedia page."""
 
-    response = requests.get(url)
+    response = safe_requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
 
     # Get the main title from the first h1 tag

@@ -5,12 +5,12 @@ import pathlib
 import re
 
 import pandas as pd
-import requests
 import wikipediaapi
 from bs4 import BeautifulSoup
 from flair.data import Sentence
 from flair.nn import Classifier
 from tqdm import tqdm
+from security import safe_requests
 
 
 def get_references(sentence, reference_dict):
@@ -35,7 +35,7 @@ def extract_data(url, reference_dict):
     @reference_dict, reference dict from extract_references()
     @return a dictionary, key is section / subsection name, value is a list of {"sentence": ..., "refs": []}
     """
-    response = requests.get(url)
+    response = safe_requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     data = {}
     for header in soup.find_all(['h1', 'h2', 'h3', "h4", "h5", "h6"]):
@@ -65,7 +65,7 @@ def extract_references(url):
     @param url, url of the wikipedia page
     @return dictionary of references, key is the citation index string, value is correpsonding url link
     """
-    response = requests.get(url)
+    response = safe_requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     references = {}
     for references_section in soup.find_all('ol', {'class': 'references'}):
