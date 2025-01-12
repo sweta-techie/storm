@@ -1,6 +1,5 @@
 import logging
 import os
-import random
 import threading
 from typing import Optional, Literal, Any
 
@@ -11,6 +10,7 @@ from dsp import ERRORS, backoff_hdlr, giveup_hdlr
 from dsp.modules.hf import openai_to_hf
 from dsp.modules.hf_client import send_hfvllm_request_v00, send_hftgi_request_v01_wrapped
 from transformers import AutoTokenizer
+import secrets
 
 try:
     from anthropic import RateLimitError
@@ -304,7 +304,7 @@ class TGIClient(dspy.HFClientTGI):
         # )
 
         response = send_hftgi_request_v01_wrapped(
-            f"{self.url}:{random.Random().choice(self.ports)}" + "/generate",
+            f"{self.url}:{secrets.SystemRandom().Random().choice(self.ports)}" + "/generate",
             url=self.url,
             ports=tuple(self.ports),
             json=payload,
