@@ -10,6 +10,7 @@ import httpx
 import toml
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from trafilatura import extract
+import fickling
 
 
 def load_api_key(toml_file_path):
@@ -329,7 +330,7 @@ class FileIOHelper:
     @staticmethod
     def load_pickle(path):
         with open(path, 'rb') as f:
-            return pickle.load(f)
+            return fickling.load(f)
 
 
 class WebPageHelper:
