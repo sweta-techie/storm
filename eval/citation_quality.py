@@ -2,7 +2,6 @@
 import copy
 import json
 import logging
-import random
 import re
 from argparse import ArgumentParser
 
@@ -14,8 +13,9 @@ from tqdm import tqdm
 from transformers import (
     AutoTokenizer, AutoModelForCausalLM
 )
+import secrets
 
-random.seed(0)
+secrets.SystemRandom().seed(0)
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
                     datefmt='%m/%d/%Y %H:%M:%S')
